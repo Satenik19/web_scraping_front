@@ -16,7 +16,7 @@ Vue.router = router;
 // Vue.$route = router;
 Vue.component('ValidationObserver', ValidationObserver);
 
-Axios.defaults.baseURL = 'http://hr-api.local/api/';
+Axios.defaults.baseURL = 'http://music.loc/api/';
 const token = localStorage.getItem('token');
 if (token) {
   // Axios.defaults.headers.common.Accept = 'application/json';
@@ -49,7 +49,6 @@ Axios.interceptors.request.use((a) => {
 Axios.interceptors.response.use((a) => a, (error) => {
   if (error.response && error.response.status === 401) {
     console.log('error response', error.response);
-    debugger;
     localStorage.removeItem('token');
     localStorage.removeItem('admin');
     Vue.router.push('/login');
