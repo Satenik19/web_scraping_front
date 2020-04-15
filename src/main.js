@@ -1,19 +1,13 @@
 import Vue from 'vue';
 import Axios from 'axios';
 import { ValidationObserver } from 'vee-validate';
-import Paginate from 'vuejs-paginate';
-import Toasted from 'vue-toasted';
 import App from './App.vue';
+import '../src/assets/css/style.css';
+import toastr from "toastr";
 import router from '../router';
 
-Vue.component('paginate', Paginate);
-// eslint-disable-next-line import/prefer-default-export
-export const bus = new Vue();
-
-Vue.use(Toasted, { duration: 1000 });
 Vue.config.productionTip = false;
 Vue.router = router;
-// Vue.$route = router;
 Vue.component('ValidationObserver', ValidationObserver);
 
 Axios.defaults.baseURL = 'http://music.loc/api/';
@@ -27,30 +21,27 @@ router.beforeEach((to, from, next) => {
     next({
       path: '/login',
     });
-  } else if (!to.matched.some((record) => record.meta.auth) && localStorage.getItem('token') && (localStorage.getItem('admin') === 'false')) {
+  } else if (!to.matched.some((record) => record.meta.auth) && localStorage.getItem('token')) {
     next({
       path: '/user',
     });
-  } else if (!to.matched.some((record) => (record.meta.admin)) && localStorage.getItem('token') && (localStorage.getItem('admin') === 'true')) {
-    next({
-      path: '/admin',
-    });
-  } else {
+  }  else {
     next();
   }
 });
-Axios.interceptors.request.use((a) => {
-  if (localStorage.getItem('token') && !a.headers.Authorization) {
-    a.headers.common.Authorization = `bearer ${localStorage.getItem('token')}`;
-  }
-  return a;
-}, (error) => Promise.reject(error));
+Vue.$http = Axios;
 
-Axios.interceptors.response.use((a) => a, (error) => {
+Vue.$http.interceptors.request.use((response) => {
+  if (localStorage.getItem('token') && !response.headers.Authorization) {
+    response.headers.common.Authorization = `bearer ${localStorage.getItem('token')}`;
+  }
+  return response;
+}, (error) => Promise.reject(error.response));
+
+
+Vue.$http.interceptors.response.use((a) => a, (error) => {
   if (error.response && error.response.status === 401) {
-    console.log('error response', error.response);
     localStorage.removeItem('token');
-    localStorage.removeItem('admin');
     Vue.router.push('/login');
   }
   return Promise.reject(error);

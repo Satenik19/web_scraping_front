@@ -4,8 +4,6 @@ import { required, email } from 'vee-validate/dist/rules';
 import { ValidationProvider } from 'vee-validate/dist/vee-validate.full.esm';
 // import { ValidationObserver } from 'vee-validate';
 import authService from '../../services/auth';
-// import Vue from "vue/types/vue";
-
 extend('email', email);
 // Override the default message.
 extend('required', {
@@ -27,14 +25,12 @@ export default {
     ValidationProvider,
   },
   mounted() {
+    const vm = this;
     // this.userInfo();
   },
   methods: {
     userInfo() {
-      // eslint-disable-next-line no-console
-      // console.log(this.errors);
       authService.login(this, this.user);
-      // alert('Form has been submitted!');
     },
   },
 

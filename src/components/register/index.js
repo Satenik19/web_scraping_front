@@ -10,20 +10,21 @@ extend('confirmedBy', {
     return value === target;
   },
   // here it is its name, because we are generating a message
-  message: 'The {_field_} does not match the {target}',
+  message: 'The {_field_} does not match with {target}',
 });
+
+Vue.config.productionTip = false;
+
 export default {
   name: 'registration',
   data() {
     return {
       user: {
-        name: '',
-        surname: '',
+        first_name: '',
+        last_name: '',
         email: '',
         password: '',
-        address: '',
         confirmation: '',
-        role: '',
       },
     };
   },
@@ -32,17 +33,10 @@ export default {
     ValidationObserver,
     ValidationProviderConfirm,
   },
-  mounted() {
-
-    // this.userInfo();
-  },
   methods: {
-    userInfo() { // eslint-disable-next-line no-console
-      // console.log(this.errors);
+    userInfo() {
       authService.register(this, this.user);
       Vue.router.push('/login');
-      // alert('Form has been submitted!');
     },
   },
-
 };

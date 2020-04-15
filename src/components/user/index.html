@@ -1,0 +1,101 @@
+<div class="home-page-container">
+    <nav>
+        <ul class="menu-container">
+            <li>
+               <div class="logo-container"><img src="/images/logo.png" alt="NO IMAGE"></div>
+            </li>
+            <li>
+                <span @click="logout"><i class="fa fa-sign-out fa-2x log-out-icon"></i></span>
+            </li>
+        </ul>
+    </nav>
+    <div class="row">
+        <div class="col-3">
+            <h3>Song Lists</h3>
+            <div class="row">
+                <table class="search-song-list">
+                    <th>Title</th>
+                    <th>Avatar</th>
+                    <th>Duration</th>
+                    <th>Actions</th>
+                    <tr v-for="song in userSongs">
+                        <td>{{ song.title }}</td>
+                        <td>{{ song.avatar }}</td>
+                        <td>{{ song.duration }}</td>
+                        <td>
+                            <input type="button" @click="deleteSong(song.video_id)" value="Delete song from list">
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        <div class="col-5">
+            <div class="form-group">
+                <input type="text" v-model="songSearchPart">
+                <input type="button" value="Search" @click="searchSong">
+            </div>
+
+            <div class="row">
+                <table class="search-song-list">
+                    <th>Title</th>
+                    <th>Avatar</th>
+                    <th>Duration</th>
+                    <th>Actions</th>
+                    <tr v-for="song in songs">
+                        <td>{{ song.title }}</td>
+                        <td>{{ song.avatar }}</td>
+                        <td>{{ song.duration }}</td>
+                        <td>
+                            <input type="button" @click="addSong(song)" value="Add song">
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        <div class="col-3">
+
+        </div>
+    </div>
+<!--    <div class="info-container">-->
+<!--        <div class="home-page-image-container"><img src="/images/first.jpg" alt="NO IMAGE"></div>-->
+<!--        <p class="home-page-info">Music, art concerned with combining vocal or instrumental sounds for beauty of form or emotional expression, usually according to cultural standards of rhythm, melody, and, in most Western music, harmony.-->
+<!--            Both the simple folk song and the complex electronic composition belong to the same activity, music. Both are humanly engineered;-->
+<!--            both are conceptual and auditory, and these factors have been present in music of all styles and in all periods of history, throughout the world.<br/><br/>-->
+
+<!--            Music is an art that, in one guise or another, permeates every human society. Modern music is heard in a bewildering profusion of styles, many of them contemporary, others engendered in past eras.-->
+<!--            Music is a protean art; it lends itself easily to alliances with words, as in song, and with physical movement, as in dance.-->
+<!--            Throughout history, music has been an important adjunct to ritual and drama and has been credited with the capacity to reflect and influence human emotion.-->
+<!--            Popular culture has consistently exploited these possibilities, most conspicuously today by means of radio, film, television, musical theatre, and the Internet.-->
+<!--            The implications of the uses of music in psychotherapy, geriatrics, and advertising testify to a faith in its power to affect human behaviour.-->
+<!--            Publications and recordings have effectively internationalized music in its most significant, as well as its most trivial, manifestations.-->
+<!--            Beyond all this, the teaching of music in primary and secondary schools has now attained virtually worldwide acceptance.<br/><br/>-->
+<!--        </p>-->
+<!--    </div>-->
+<!--    <div class="info-container">-->
+<!--        <div class="home-page-image-container"><img src="/images/second.jpg" alt="NO IMAGE"></div>-->
+<!--        <p class="home-page-info">Music is everywhere to be heard. But what is music? Commentators have spoken of “the relationship of music to the human senses and intellect,”-->
+<!--            thus affirming a world of human discourse as the necessary setting for the art. A definition of music itself will take longer. As Aristotle said,-->
+<!--            “It is not easy to determine the nature of music or why anyone should have a knowledge of it.”-->
+<!--            Early in the 20th century, it was regarded as a commonplace that a musical tone was characterized by the regularity of its vibrations;-->
+<!--            this uniformity gave it a fixed pitch and distinguished its sounds from “noise.” Although that view may have been supported by traditional music,-->
+<!--            by the latter half of the 20th century it was recognized as an unacceptable yardstick. Indeed, “noise” itself and silence became elements in composition,-->
+<!--            and random sounds were used (without prior knowledge of what they would be) by composers, such as the American John Cage, and others in works having aleatory (chance) or-->
+<!--            impromptu features. Tone, moreover, is only one component in music, others being rhythm, timbre (tone colour), and texture. Electronic machinery enabled some composers to-->
+<!--            create works in which the traditional role of the interpreter is abolished and to record, directly on tape or into a digital file, sounds that were formerly beyond human ability to produce,-->
+<!--            if not to imagine.<br/><br/>-->
+
+<!--            From historical accounts it is clear that the power to move people has always been attributed to music; its ecstatic possibilities have been recognized in all cultures-->
+<!--            and have usually been admitted in practice under particular conditions, sometimes stringent ones. In India, music has been put into the service of religion from-->
+<!--            earliest times; Vedic hymns stand at the beginning of the record. As the art developed over many centuries into a music of profound melodic and rhythmic intricacy,-->
+<!--            the discipline of a religious text or the guideline of a story determined the structure. In the 21st century the narrator remains central to the performance of much Indian traditional music,-->
+<!--            and the virtuosity of a skillful singer rivals that of the instrumentalists. There is very little concept of vocal or instrumental idiom in the Western sense.-->
+<!--            The vertical dimension of chord structure—that is, the effects created by sounding tones simultaneously—is not a part of South Asian classical music; the divisions of an octave (intervals)-->
+<!--            are more numerous than in Western music, and the melodic complexity of the music goes far beyond that of its Western counterpart. Moreover, an element of improvisation is retained that-->
+<!--            is vital to the success of a performance. The spontaneous imitation carried on between an instrumentalist and narrator, against the insistent rhythmic subtleties of the drums,-->
+<!--            can be a source of the greatest excitement, which in large measure is because of the faithful adherence to the rigid-->
+<!--            rules that govern the rendition of ragas—the ancient melodic patterns of Indian music.</p>-->
+<!--    </div>-->
+</div>
+
+
+

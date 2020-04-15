@@ -1,0 +1,45 @@
+<div class="page-content">
+    <div class="register-form">
+        <ValidationObserver v-slot="{  invalid  }">
+            <form class="form-detail" @submit.prevent="userInfo()">
+                <h2>Registration Form</h2>
+                <validation-provider rules="alpha|required" v-slot="{ errors }" name="first name" >
+                    <div class="register-input-field-container">
+                        <input class="text mb-3" type="text" id="first_name" placeholder="First name" required="" v-model="user.first_name" >
+                        <span class="error-message">{{ errors[0] }}</span>
+                    </div>
+                </validation-provider >
+                <validation-provider rules="alpha|required" v-slot="{ errors }" name="last name">
+                    <div class="register-input-field-container">
+                        <input class="text mb-3" type="text" id="last_name" placeholder="Last name" required="" v-model="user.last_name">
+                        <span class="error-message">{{ errors[0] }}</span>
+                    </div>
+                </validation-provider>
+                <validation-provider rules="email|required" v-slot="{ errors }" name="email">
+                    <div class="register-input-field-container">
+                        <input class="text mb-3" type="email" id="email" placeholder="Email" required="" v-model="user.email">
+                        <span class="error-message">{{ errors[0] }}</span>
+                    </div>
+                </validation-provider>
+                <Validation-provider-confirm vid="first" name="password" rules="required|confirmedBy:@second" v-slot="{ errors }">
+                    <div class="register-input-field-container">
+                        <input class="text mb-3" type="password"  placeholder="Password" required="" v-model="user.password" id="password"/>
+                        <span class="error-message">{{ errors[0] }}</span>
+                    </div>
+                </Validation-provider-confirm>
+                <Validation-provider-confirm vid="second" name="confirmed password" rules="required" v-slot="{ errors }">
+                    <div class="register-input-field-container">
+                        <input class="text mb-3" type="password" placeholder="Confirm password" required="" v-model="user.confirmation"  id="conf"/>
+                        <span class="error-message">{{ errors[0] }}</span>
+                    </div>
+                </Validation-provider-confirm>
+                <div class="form-row-last">
+                    <input type="submit" value="SIGN UP" :disabled="invalid" class="register-btn">
+                </div>
+            </form>
+        </ValidationObserver>
+        <div>
+            <p class="already-have-account">Already have an Account? <router-link to="/login" class="login-link"><a href="#" class="login-now"> Login Now!</a></router-link></p>
+        </div>
+    </div>
+</div>

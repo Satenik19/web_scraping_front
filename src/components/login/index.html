@@ -1,0 +1,26 @@
+<div class="page-content">
+    <div class="register-form">
+        <ValidationObserver v-slot="{  invalid  }">
+            <form class="form-detail" @submit.prevent="userInfo()">
+                <h2>Please Log In</h2>
+                <validation-provider rules="email|required" v-slot="{ errors }" name="email">
+                    <div class="login-input-field-container">
+                    <input type="email" class="text"  placeholder="Email" required="" v-model="user.email">
+                    <span class="error-message">{{ errors[0] }}</span>
+                    </div>
+                </validation-provider>
+                <validation-provider rules="alpha_num" v-slot="{ errors }" name="password">
+                    <div class="login-input-field-container">
+                    <input type="password" class="text" placeholder="Password" required="" v-model="user.password">
+                    <span class="error-message">{{ errors[0] }}</span>
+                    </div>
+                </validation-provider>
+                <div class="form-row-last">
+                    <input type="submit" value="LOG IN" :disabled="invalid" class="register-btn">
+                </div>
+            </form>
+        </ValidationObserver>
+        <p class="already-have-account">Don't have an Account? <router-link to="/register" class="login-link"><a href="#" class="login-now"> Sign up Now!</a></router-link></p>
+    </div>
+</div>
+

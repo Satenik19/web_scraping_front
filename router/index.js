@@ -1,52 +1,41 @@
 import Vue from 'vue';
 import Router from 'vue-router';
-import Registration from '../src/components/Registration/index.vue';
-import Login from '../src/components/Login/index.vue';
-import Home from '../src/components/Home/index.vue';
-import User from '../src/components/User/index.vue';
-import Order from '../src/components/Order/index.vue';
-import Admin from '../src/components/Admin/index.vue';
+import login from '../src/components/login/index.vue';
+import register from '../src/components/register/index.vue';
+import user from '../src/components/user/index.vue';
 
 Vue.use(Router);
 
 export default new Router({
   routes: [
     {
-      name: 'Home',
-      path: '/',
-      component: Home,
-      meta: { guest: true, auth: false, admin: false },
+      name: 'register',
+      path: '/register',
+      component: register,
+      meta: {
+        auth: false
+      },
     },
     {
-      name: ' Signup',
-      path: '/signup',
-      component: Registration,
-      meta: { guest: true },
-    },
-    {
-      name: 'Login',
+      name: 'login',
       path: '/login',
-      component: Login,
-      meta: { guest: true },
+      component: login,
+      meta: {
+        auth: false
+      },
     },
     {
-      name: 'User',
+      name: 'login',
+      path: '/',
+      redirect: '/login'
+    },
+    {
+      name: 'user',
       path: '/user',
-      component: User,
-      meta: { auth: true, admin: false },
-    },
-    {
-      name: 'Order',
-      path: '/order',
-      component: Order,
-      meta: { auth: true, admin: false },
-    },
-    {
-      name: 'Admin',
-      path: '/admin',
-      component: Admin,
-      meta: { auth: false, admin: true },
-    },
+      component: user,
+      meta: {
+        auth: true
+      },
+    }
   ],
-  // TODO:props
 });
